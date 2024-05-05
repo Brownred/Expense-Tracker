@@ -9,6 +9,7 @@ import dotenv from 'dotenv';
  
 import Resolvers from "./resolvers/index.js"
 import TypeDefs from "./typeDefs/index.js"
+import { connectDB } from './db/connectDB.js';
 
 dotenv.config();
 const app = express();
@@ -30,5 +31,7 @@ app.use('/', cors(), express.json(), expressMiddleware(server, {context: async (
 await new Promise((resolve) => {
   httpServer.listen({port:4000}, resolve)
 });
+
+await connectDB()
  
 console.log(`🚀 Server ready at http://localhost:4000/`)
